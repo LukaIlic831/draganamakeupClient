@@ -66,10 +66,10 @@ export class SignUpPageComponent {
         },
         error: (err) => {
           this.signupErrorAfterSubmit = err.error;
-          this.isSubmit = false;
         },
       });
     }
+    this.isSubmit = false;
   }
 
   togglePassword(event: MouseEvent) {

@@ -54,11 +54,11 @@ export class SignInPageComponent {
           this.router.navigate(['/appointment']);
         },
         error: (err) => {
-          this.isSubmit = false;
           this.signinErrorAfterSubmit = err.error;
         },
       });
     }
+    this.isSubmit = false;
   }
 
   togglePassword(event: MouseEvent) {
