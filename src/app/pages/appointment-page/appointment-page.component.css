@@ -1,0 +1,32 @@
+.components__overview{
+    display: flex;
+    justify-content:space-between;
+}
+
+.mobile-schedule{
+    display: none;
+}
+
+.loading{
+    width: 100%;
+    background: #d81b60;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.loading p{
+    font-size: 18px;
+    padding: 10px;
+    color: wheat;
+}
+
+@media (max-width: 1200px) {
+    .components__overview{
+        display: block;
+    }
+
+    .mobile-schedule{
+        display: block;
+    }
+  }

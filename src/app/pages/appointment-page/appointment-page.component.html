@@ -1,0 +1,28 @@
+<div class="main__wrapper">
+  <div class="components__overview">
+    <app-appointment-profile [userData]="user" />
+    <app-appointment-calendar [userData]="user" />
+    <div class="mobile-schedule">
+      <div class="loading" *ngIf="isLoading">
+        <p>Učitava se...</p>
+      </div>
+      <ng-container *ngIf="!isLoading">
+        <app-appointment-schedule-mobile
+          [userData]="user"
+          [scheduledAppointment]="scheduledAppointment"
+          [getScheduledApp]="getScheduledApp"
+        />
+        <app-appointment-view-mobile
+          [scheduledAppointment]="scheduledAppointment"
+          (toggleEvent)="updateCancelVisibility($event)"
+        />
+      </ng-container>
+      <app-appointment-cancel-mobile
+        *ngIf="isCancelVisible"
+        (toggleEvent)="updateCancelVisibility($event)"
+        (removeAppointmentEvent)="removeScheduledAppointment()"
+        [scheduledAppointmentID]="scheduledAppointment?.id"
+      />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="appointment__profile--wrapper">
+  <mat-card class="appointment__profile">
+    <mat-card-header>
+      <mat-card-title>Moj profil</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ul
+        class="appointment__details"
+      >
+        <li class="appointment__details--item">
+          <p>Korisničko Ime</p>
+          <span class="skeleton-text" *ngIf="!userData"></span>
+          <span *ngIf="userData">{{ userData.username }}</span>
+        </li>
+        <li class="appointment__details--item">
+          <p>Broj Telefona</p>
+          <span class="skeleton-text" *ngIf="!userData"></span>
+          <span *ngIf="userData">{{ userData.phone }}</span>
+        </li>
+      </ul>
+      <div class="appointment__buttons">
+        <button class="appointment__buttons--button" (click)="signOut()">
+          Odjavi Se
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div class="appointment--info">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="info"
+    ></mat-icon>
+    <p>
+      Rezervacija termina je moguća samo za datume koji su najmanje dva dana
+      unapred (isto važi i za otkazivanje)
+    </p>
+  </div>
+</div>

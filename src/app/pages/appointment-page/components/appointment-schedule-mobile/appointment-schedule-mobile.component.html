@@ -1,0 +1,101 @@
+<div class="schedule__appointment--wrapper" *ngIf="!scheduledAppointment">
+  <mat-card class="schedule__appointment">
+    <mat-card-header>
+      <mat-card-title>Zakaži termin</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit($event)">
+      <mat-card-content>
+        <div class="schedule__appointment--info">
+          <p>
+            Rezervacija termina je moguća samo za datume koji su najmanje dva
+            dana unapred (isto vazi i za otkazivanje)
+          </p>
+        </div>
+        <div class="schedule__appointment--select-fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Izaberite datum</mat-label>
+            <mat-select
+              formControlName="date"
+              (selectionChange)="onSelectDate($event)"
+            >
+              @for (day of days; track day) {
+              <mat-option [value]="day">{{ day }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            [ngClass]="{
+              'show--field': this.scheduleForm.value?.date
+            }"
+          >
+            <mat-label>Izaberite uslugu</mat-label>
+            <mat-select
+              formControlName="service"
+              (selectionChange)="onSelectService($event)"
+            >
+              <mat-option value="sminkanje">Šminkanje (1 sat)</mat-option>
+              <mat-option value="obrve">Obrve (30 minuta)</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            [ngClass]="{
+              'show--field':
+                this.scheduleForm.value?.service && appointments.length !== 0
+            }"
+          >
+            <mat-label *ngIf="appointments.length === 0; else available"
+              >Nema slobodnih termina</mat-label
+            >
+            <ng-template #available>
+              <mat-label>Izaberite slobodan termin</mat-label>
+            </ng-template>
+            <ng-container
+              *ngIf="
+                this.scheduleForm.value?.service === 'sminkanje';
+                else regularAppointments
+              "
+            >
+              <mat-select formControlName="appointmentStartTime">
+                @for (appointment of appointmentsForMakeup; track appointment) {
+                <mat-option [value]="appointment.from"
+                  >{{ appointment.from }} - {{ appointment.to }}</mat-option
+                >
+                }
+              </mat-select>
+            </ng-container>
+            <ng-template #regularAppointments>
+              <mat-select formControlName="appointmentStartTime">
+                @for (appointment of appointments; track appointment) {
+                <mat-option [value]="appointment.from"
+                  >{{ appointment.from }} - {{ appointment.to }}</mat-option
+                >
+                }
+              </mat-select>
+            </ng-template>
+          </mat-form-field>
+        </div>
+        <div class="schedule__appointment--comment">
+          <textarea
+            formControlName="comment"
+            maxlength="200"
+            placeholder="Unesite dodatne informacije (opciono)"
+          ></textarea>
+        </div>
+        <div class="error-block" *ngIf="isError">
+          <p>Došlo je do greške.</p>
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <button
+          class="schedule__appointment--confirm"
+          type="submit"
+          [ngClass]="{ loading: isSubmit }"
+        >
+          Zakaži Termin
+        </button>
+      </mat-card-footer>
+    </form>
+  </mat-card>
+</div>

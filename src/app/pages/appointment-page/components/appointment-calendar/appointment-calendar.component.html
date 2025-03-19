@@ -1,0 +1,145 @@
+<app-appointment-scheduler
+  *ngIf="isSchedulerVisible"
+  [time]="selectedTime"
+  [date]="selectedDate"
+  [hideFirstOption]="hideFirstOption"
+  [userSession]="userData?.sessionID"
+  [getAppointments]="getAppointments"
+  (toggleEvent)="updateSchedulerVisibility($event)"
+  (userAlreadyScheduledEvent)="updateUserAlreadyScheduled($event)"
+/>
+<app-appointment-cancel
+  *ngIf="isCancelVisible"
+  (toggleEvent)="updateCancelVisibility($event)"
+  [selectedAppointmentID]="selectedAppointment?.id"
+  [getAppointments]="getAppointments"
+  (userAlreadyScheduledEvent)="updateUserAlreadyScheduled($event)"
+/>
+<app-appointment-view
+  *ngIf="isAppointmentVisible"
+  [isAppointmentVisible]="isAppointmentVisible"
+  [selectedAppointmentID]="selectedAppointment?.id"
+  (toggleEvent)="updateViewVisibility($event)"
+/>
+<div
+  class="table__date"
+  [ngClass]="{
+    'add-margin': isAdmin
+  }"
+>
+  <div class="table__date--info">
+    <h2>Nedelja: {{ firstDayOfWeek }} - {{ lastDayOfWeek }}</h2>
+    <div class="table__date--buttons">
+      <button *ngIf="isThisWeek; else isNextWeek" (click)="setNextWeek()">
+        sledeća nedelja
+      </button>
+      <ng-template #isNextWeek>
+        <button (click)="setThisWeek()">prethodna nedelja</button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<table
+  [ngClass]="{
+    'add-margin': isAdmin,
+    'loading' : isLoading
+  }"
+>
+  <thead>
+    <tr>
+      <td></td>
+      <td>Pon</td>
+      <td>Uto</td>
+      <td>Sre</td>
+      <td>Čet</td>
+      <td>Pet</td>
+      <td>Sub</td>
+      <td>Ned</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let appointment of appointments">
+      <td>
+        {{ appointment.time }}
+        <span *ngIf="appointment.time == '20:30'"> 21:00 </span>
+      </td>
+      <ng-container *ngFor="let date of weekDays">
+        <ng-container
+          *ngIf="date.isSameOrBefore(tomorrow) && !isAdmin; else availableBlock"
+        >
+          <ng-container
+            *ngIf="
+                getAppointment(appointment.allAppointments, date.date()) &&
+                curAppointment?.user?.id === userData?.id;
+              else notAvailableBlock
+            "
+          >
+            <td
+              class="table__block--appointment scheduled-appointment scheduled-appointment-user"
+              style="cursor: default; pointer-events: none"
+            >
+              <ng-container *ngIf="!curAppointment?.isScheduledAbove">
+                <div
+                  [style.bottom.%]="curAppointment?.duration === 30 ? 0 : -102"
+                >
+                  Rezervisano
+                </div>
+              </ng-container>
+            </td>
+          </ng-container>
+          <ng-template #notAvailableBlock>
+            <td>
+              <div class="table__block--no-appointment"></div>
+            </td>
+          </ng-template>
+        </ng-container>
+        <ng-template #availableBlock>
+          <ng-container
+            *ngIf="
+              getAppointment(appointment.allAppointments, date.date());
+              else canBeScheduled
+            "
+          >
+            <td
+              class="table__block--appointment scheduled-appointment"
+              [ngClass]="{
+                'scheduled-appointment-user':
+                  curAppointment?.user?.id == userData?.id,
+                'scheduled-appointment-admin': isAdmin
+              }"
+              (click)="
+                !isAdmin
+                  ? openCancel(
+                      $event,
+                      getAppointment(appointment.allAppointments, date.date())!
+                    )
+                  : openAppointment(
+                      getAppointment(appointment.allAppointments, date.date())!
+                    )
+              "
+            >
+              <ng-container *ngIf="!curAppointment?.isScheduledAbove">
+                <div
+                  [style.bottom.%]="curAppointment?.duration === 30 ? 0 : -102"
+                >
+                  Rezervisano
+                </div>
+              </ng-container>
+            </td>
+          </ng-container>
+          <ng-template #canBeScheduled>
+            <td
+              class="table__block--appointment available-appointment"
+              (click)="openScheduler(appointment.time, date)"
+              [ngClass]="{
+                'not-available': userAlreadyScheduled || isAdmin
+              }"
+            >
+              <div></div>
+            </td>
+          </ng-template>
+        </ng-template>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>

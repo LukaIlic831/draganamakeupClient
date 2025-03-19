@@ -1,0 +1,66 @@
+<div class="main__wrapper">
+  <div class="auth__block--wrapper">
+    <mat-card class="auth__block">
+      <mat-card-header>
+        <mat-card-title>Uloguj se</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="signinForm" (ngSubmit)="onSubmit($event)">
+        <mat-card-content>
+          <div class="auth__block--fields">
+            <div class="auth__block--phone">
+              <mat-form-field appearance="outline">
+                <mat-label>Unesite broj telefona</mat-label>
+                <input
+                  matInput
+                  type="tel"
+                  pattern="[0-9]*"
+                  inputmode="numeric"
+                  maxlength="10"
+                  formControlName="phone"
+                />
+              </mat-form-field>
+            </div>
+            <div class="auth__block--password">
+              <mat-form-field appearance="outline">
+                <mat-label>Unesite šifru</mat-label>
+                <input
+                  matInput
+                  [type]="hidePassword() ? 'password' : 'text'"
+                  formControlName="password"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="togglePassword($event)"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidePassword()"
+                  type="button"
+                >
+                  <mat-icon>{{
+                    hidePassword() ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf="signinErrorAfterSubmit" class="auth__block--error">
+            <p>{{ signinErrorAfterSubmit }}</p>
+          </div>
+        </mat-card-content>
+        <mat-card-footer>
+          <button
+            class="auth__block--confirm"
+            [ngClass]="{ 'loading': isSubmit }"
+            type="submit"
+          >
+            Uloguj se
+          </button>
+          <div>
+            <p>Nemate nalog?</p>
+            <a href="/sign-up">Registrujte se</a>
+          </div>
+        </mat-card-footer>
+      </form>
+    </mat-card>
+  </div>
+</div>

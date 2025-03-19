@@ -1,0 +1,43 @@
+<mat-card class="view__appointment">
+  <mat-card-header>
+    <mat-card-title>{{ appointment?.time }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul class="appointment__details">
+      <li class="appointment__details--item">
+        <p>Korisnicko ime</p>
+        <span>{{ appointment?.user!.username }}</span>
+      </li>
+      <li class="appointment__details--item">
+        <p>Broj telefona</p>
+        <span>{{ appointment?.user!.phone }}</span>
+      </li>
+      <li class="appointment__details--item">
+        <p>Usluga</p>
+        <span>{{ appointment?.service }}</span>
+      </li>
+      <li class="appointment__details--item info" *ngIf="appointment?.comment">
+        <p>Dodatne Informacije</p>
+        <span>{{ appointment?.comment }}</span>
+      </li>
+      <li class="appointment__details--item info" *ngIf="message">
+        <p>Poruka</p>
+        <span>{{ message }}</span>
+      </li>
+    </ul>
+    <div class="appointment__buttons">
+      <button
+        class="appointment__buttons--button"
+        (click)="createMessage(appointment)"
+        *ngIf="!message; else copyButton"
+      >
+        Napravi Poruku
+      </button>
+      <ng-template #copyButton>
+        <button class="appointment__buttons--button" (click)="copyMessage()">
+          Kopiraj Poruku
+        </button>
+      </ng-template>
+    </div>
+  </mat-card-content>
+</mat-card>

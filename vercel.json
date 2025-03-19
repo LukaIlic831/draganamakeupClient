@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/(.*)",
+        "destination": "draganamakeupbackend-production.up.railway.app/$1"
+      }
+    ]
+  }

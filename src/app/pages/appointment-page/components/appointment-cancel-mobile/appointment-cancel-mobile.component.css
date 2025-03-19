@@ -1,0 +1,74 @@
+mat-card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  mat-card-title {
+    font-size: 24px !important;
+    font-weight: bold;
+    color: #780378;
+  }
+  
+  .appointment__cancel--wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(154, 152, 152, 0.575);
+    z-index: 9999;
+    margin: 0 auto;
+  }
+  
+  .appointment__cancel {
+    margin: auto 20px;
+    border-radius: 30px;
+    padding: 10px;
+    background: #ffffff;
+    text-align: center;
+  }
+  
+  .appointment__cancel--buttons {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .appointment__cancel--buttons button {
+    position: relative;
+    max-width: 200px;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background: #4b044b;
+    transition: ease-in-out 0.2s;
+    border: 2px solid #4b044b;
+    border-radius: 10px;
+    opacity: 1;
+    cursor: pointer;
+  }
+  
+  .appointment__cancel--buttons button:last-child {
+    color: #4b044b8c;
+    background: transparent;
+    border: 2px solid #4b044b8c;
+    margin-left: 14px;
+  }
+  
+  .appointment__cancel--buttons button:last-child:hover {
+      color: #4b044b8c;
+  }
+  
+  .appointment__cancel--buttons button:hover {
+    color: #4b044b;
+    background-color: transparent;
+  }
+  

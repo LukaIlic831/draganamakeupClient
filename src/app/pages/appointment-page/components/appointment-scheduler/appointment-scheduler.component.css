@@ -1,0 +1,147 @@
+.appointment__schedule {
+  min-width: 30vw;
+  border-radius: 30px;
+  padding: 10px;
+  background: #ffffff;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.appointment__schedule--wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(154, 152, 152, 0.575);
+  z-index: 9999;
+}
+
+.error-block {
+  background-color: rgb(139, 14, 14);
+  color: white;
+  border-radius: 4px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.error-block p {
+  padding: 10px;
+}
+
+.loading{
+  opacity: 0.5 !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-title {
+  font-size: 24px !important;
+  font-weight: bold;
+  color: #780378;
+}
+
+.appointment__schedule--options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.appointment__schedule--options label {
+  position: relative;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border-radius: 10px;
+  color: #d81b60;
+  border: 2px solid #d81b60;
+}
+
+.appointment__schedule--options label:hover {
+  color: white;
+  background-color: #d81b60;
+}
+
+label:has(input:checked) {
+  background-color: #d81b60 !important;
+  border-color: #d81b60 !important;
+  color: white !important;
+  cursor: default;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.appointment__schedule--comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.appointment__schedule--comment textarea {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  resize: none;
+  color: black;
+  height: 96px;
+  border: 2px solid #cccccc;
+  background-color: #e0e0e0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.appointment__schedule--button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.appointment__schedule--button button {
+  position: relative;
+  max-width: 200px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px;
+  text-decoration: none;
+  color: white;
+  background: #4b044b;
+  transition: ease-in-out 0.2s;
+  border: 2px solid #4b044b;
+  border-radius: 10px;
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
+}
+
+.appointment__schedule--button button:hover {
+  color: #4b044b;
+  background-color: transparent;
+}
+
+.button-submit {
+  opacity: 1 !important;
+  pointer-events: all !important;
+  cursor: pointer !important;
+}

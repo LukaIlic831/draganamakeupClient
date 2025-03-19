@@ -1,0 +1,55 @@
+.admin__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.mobile-appointments {
+  display: none;
+}
+
+.view__appointment--wrapper {
+  display: block;
+  width: 100%;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d81b60;
+  color: white;
+}
+
+
+h2 {
+  color: #333333;
+  text-align: center;
+}
+
+.view__appointment--title {
+  padding-bottom: 10px;
+}
+
+.view__appointment--title h1 {
+  font-weight: bold;
+  color: #780378;
+}
+
+
+@media (max-width: 1200px) {
+  .mobile-appointments {
+    display: block;
+    margin: 0 20px;
+  }
+
+  .admin__wrapper {
+    display: block;
+  }
+}
+

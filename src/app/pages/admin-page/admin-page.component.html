@@ -1,0 +1,29 @@
+<header>
+  <h1>Zakazani Termini</h1>
+</header>
+<div class="admin__wrapper">
+  <app-appointment-calendar [userData]="user" [isAdmin]="isAdmin" />
+  <div class="mobile-appointments">
+    <div class="view__appointment--wrapper">
+      <ng-container *ngIf="noAppointments">
+        <h2>Nema zakazanih termina!</h2>
+      </ng-container>
+      <div
+        class="view__appointment--block"
+        *ngFor="let day of days; trackBy: trackByDate"
+        [id]="'block-' + day.date"
+      >
+        <ng-container *ngIf="day.allAppointments.length !== 0">
+          <div class="view__appointment--title">
+            <h1>{{ day?.date }}</h1>
+          </div>
+          <app-admin-appointment
+            *ngFor="let appointment of day?.allAppointments; trackBy: trackById"
+            [id]="'block-' + appointment.user!.id"
+            [appointment]="appointment"
+          />
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

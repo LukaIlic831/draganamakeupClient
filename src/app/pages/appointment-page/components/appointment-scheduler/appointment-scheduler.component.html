@@ -1,0 +1,49 @@
+<div class="appointment__schedule--wrapper" (click)="toggle($event)">
+  <mat-card class="appointment__schedule">
+    <mat-card-header>
+      <mat-card-title>Izaberite Uslugu</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="appointment__schedule--options">
+        <label *ngIf="!hideFirstOption">
+          <input
+            type="radio"
+            id="sminkanje"
+            name="value-radio"
+            value="sminkanje"
+            [(ngModel)]="selectedService"
+          />
+          <p>Šminkanje (1 sat)</p>
+        </label>
+        <label>
+          <input
+            type="radio"
+            id="obrve"
+            name="value-radio"
+            value="obrve"
+            [(ngModel)]="selectedService"
+          />
+          <p>Obrve (30 minuta)</p>
+        </label>
+      </div>
+      <div class="appointment__schedule--comment">
+        <textarea
+          maxlength="200"
+          placeholder="Unesite dodatne informacije (opciono)"
+          [(ngModel)]="comment"
+        ></textarea>
+      </div>
+      <div class="error-block" *ngIf="isError">
+        <p>Došlo je do greške.</p>
+      </div>
+      <div class="appointment__schedule--button">
+        <button
+          (click)="scheduleAppointment()"
+          [ngClass]="{ 'button-submit': selectedService && !isSubmit }"
+        >
+          Zakaži Termin
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
