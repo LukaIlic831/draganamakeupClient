@@ -56,20 +56,20 @@ export class SignUpPageComponent {
   }
 
   onSubmit(event: SubmitEvent) {
-    this.isSubmit = true;
     const buttonClicked = event.submitter as HTMLButtonElement;
     this.signupErrorAfterSubmit = '';
     if (buttonClicked.className && this.signupForm.valid) {
+      this.isSubmit = true;
       this.signUpPageService.signUpUser(this.signupForm.value).subscribe({
         next: () => {
           this.router.navigate(['/appointment']);
         },
         error: (err) => {
           this.signupErrorAfterSubmit = err.error;
+          this.isSubmit = false;
         },
       });
     }
-    this.isSubmit = false;
   }
 
   togglePassword(event: MouseEvent) {

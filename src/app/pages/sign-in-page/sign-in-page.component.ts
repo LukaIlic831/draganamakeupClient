@@ -45,20 +45,20 @@ export class SignInPageComponent {
   }
 
   onSubmit(event: SubmitEvent) {
-    this.isSubmit = true;
     const buttonClicked = event.submitter as HTMLButtonElement;
     this.signinErrorAfterSubmit = '';
     if (buttonClicked.className && this.signinForm.valid) {
+      this.isSubmit = true;
       this.signInPageService.signInUser(this.signinForm.value).subscribe({
         next: () => {
           this.router.navigate(['/appointment']);
         },
         error: (err) => {
           this.signinErrorAfterSubmit = err.error;
+          this.isSubmit = false;
         },
       });
     }
-    this.isSubmit = false;
   }
 
   togglePassword(event: MouseEvent) {
