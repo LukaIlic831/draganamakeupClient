@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AppointmentCalendarComponent } from '../appointment-page/components/appointment-calendar/appointment-calendar.component';
 import { GetUserService } from '../../services/get-user.service';
 import { MatCardModule } from '@angular/material/card';
@@ -9,6 +9,7 @@ import { AdminAppointmentComponent } from './components/admin-appointment/admin-
 import { User } from '../../models/user.model';
 import { AppInterface, Appointment } from '../../models/appointment.model';
 import { Router } from '@angular/router';
+import { AdminScheduleComponent } from './components/admin-schedule/admin-schedule.component';
 interface Days {
   date: string;
   allAppointments: AppInterface[];
@@ -21,6 +22,7 @@ interface Days {
     MatCardModule,
     CommonModule,
     AdminAppointmentComponent,
+    AdminScheduleComponent,
   ],
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.css',
@@ -30,26 +32,38 @@ export class AdminPageComponent implements OnInit {
   user: User | null = null;
   days: Days[] = [];
   noAppointments: boolean = false;
+  isScheduleVisible: boolean = false;
+  @ViewChild(AppointmentCalendarComponent) calendarComponent!: AppointmentCalendarComponent;
 
   constructor(
     private getUserService: GetUserService,
     private adminService: AdminPageService,
     private router: Router
   ) {
+  }
+
+  setDays(){
+    this.days = [];
     let currentDate = moment();
-    let weekStart = currentDate.clone().startOf('isoWeek');
+    let weekStart = moment().clone().startOf('isoWeek');
     this.days.push({
       date: currentDate.format('DD MMM YYYY'),
       allAppointments: [],
     });
     for (let i = 0; i <= 13; i++) {
-      if (moment(weekStart).add(i, 'day').isAfter(currentDate)) {
-        this.days.push({
-          date: moment(weekStart).add(i, 'day').format('DD MMM YYYY'),
-          allAppointments: [],
-        });
-      }
+      this.days.push({
+        date: moment(weekStart).add(i, 'day').format('DD MMM YYYY'),
+        allAppointments: [],
+      });
     }
+  }
+
+  openAdminSchedule() {
+    this.isScheduleVisible = true;
+  }
+
+  updateIsScheduleVisible(isScheduleVisible: boolean) {
+    this.isScheduleVisible = isScheduleVisible;
   }
 
   trackByDate(index: number, day: Days): string {
@@ -80,7 +94,9 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-  getAppointments() {
+  getAppointments = () => {
+    this.setDays();
+    this.calendarComponent.getAppointments();
     this.adminService.getAppointments().subscribe({
       next: (res) => {
         res.length === 0 && (this.noAppointments = true);

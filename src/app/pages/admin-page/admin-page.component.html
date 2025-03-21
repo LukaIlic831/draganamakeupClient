@@ -1,8 +1,18 @@
 <header>
   <h1>Zakazani Termini</h1>
 </header>
+<div class="admin__schedule--wrapper" *ngIf="isScheduleVisible">
+  <app-admin-schedule
+    (toggleEvent)="updateIsScheduleVisible($event)"
+    [userData]="user"
+    [getAppointments]="getAppointments"
+  />
+</div>
 <div class="admin__wrapper">
-  <app-appointment-calendar [userData]="user" [isAdmin]="isAdmin" />
+  <div class="admin__schedule--button">
+    <button (click)="openAdminSchedule()">Dodaj termin</button>
+  </div>
+  <app-appointment-calendar [userData]="user" [isAdmin]="isAdmin"/>
   <div class="mobile-appointments">
     <div class="view__appointment--wrapper">
       <ng-container *ngIf="noAppointments">

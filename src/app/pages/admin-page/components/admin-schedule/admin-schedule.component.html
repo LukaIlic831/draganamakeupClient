@@ -1,0 +1,106 @@
+<div class="schedule__appointment--wrapper">
+  <mat-card class="schedule__appointment">
+    <mat-card-header>
+      <mat-card-title>Dodaj termin</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit($event)">
+      <mat-card-content>
+        <div class="schedule__appointment--select-fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Izaberi datum</mat-label>
+            <mat-select
+              formControlName="date"
+              (selectionChange)="onSelectDate($event)"
+            >
+              @for (day of days; track day) {
+              <mat-option [value]="day">{{ day }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            [ngClass]="{
+              'show--field': this.scheduleForm.value?.date
+            }"
+          >
+            <mat-label>Izaberi uslugu</mat-label>
+            <mat-select
+              formControlName="service"
+              (selectionChange)="onSelectService($event)"
+            >
+              <mat-option value="sminkanje">Šminkanje (1 sat)</mat-option>
+              <mat-option value="obrve">Obrve (30 minuta)</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            [ngClass]="{
+              'show--field':
+                this.scheduleForm.value?.service && appointments.length !== 0
+            }"
+          >
+            <mat-label *ngIf="appointments.length === 0; else available"
+              >Nema slobodnih termina</mat-label
+            >
+            <ng-template #available>
+              <mat-label>Izaberi slobodan termin</mat-label>
+            </ng-template>
+            <ng-container
+              *ngIf="
+                this.scheduleForm.value?.service === 'sminkanje';
+                else regularAppointments
+              "
+            >
+              <mat-select formControlName="appointmentStartTime">
+                @for (appointment of appointmentsForMakeup; track appointment) {
+                <mat-option [value]="appointment.from"
+                  >{{ appointment.from }} - {{ appointment.to }}</mat-option
+                >
+                }
+              </mat-select>
+            </ng-container>
+            <ng-template #regularAppointments>
+              <mat-select formControlName="appointmentStartTime">
+                @for (appointment of appointments; track appointment) {
+                <mat-option [value]="appointment.from"
+                  >{{ appointment.from }} - {{ appointment.to }}</mat-option
+                >
+                }
+              </mat-select>
+            </ng-template>
+          </mat-form-field>
+          <mat-form-field class="show--field" appearance="outline">
+            <mat-label>Unesi broj telefona klijenta</mat-label>
+            <input
+              matInput
+              type="tel"
+              pattern="[0-9]*"
+              inputmode="numeric"
+              maxlength="10"
+              formControlName="phone"
+            />
+          </mat-form-field>
+          <mat-form-field class="show--field" appearance="outline">
+            <mat-label>Unesi ime ili instagram username klijenta</mat-label>
+            <input matInput="username" formControlName="username" />
+          </mat-form-field>
+        </div>
+        <div class="error-block" *ngIf="isError">
+          <p>Došlo je do greške.</p>
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <div class="schedule__appointment--buttons">
+          <button
+            class="schedule__appointment--confirm"
+            type="submit"
+            [ngClass]="{ loading: isSubmit }"
+          >
+            Dodaj Termin
+          </button>
+          <button (click)="close()">Otkazi</button>
+        </div>
+      </mat-card-footer>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,231 @@
+.schedule__appointment--wrapper {
+  display: block;
+  width: 100%;
+}
+
+.schedule__appointment--comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.schedule__appointment--buttons {
+  display: flex;
+}
+
+.schedule__appointment--buttons button {
+  position: relative;
+  max-width: 200px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px;
+  text-decoration: none;
+  color: white;
+  background: #4b044b;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+  border: 2px solid #4b044b;
+  border-radius: 10px;
+}
+
+.schedule__appointment--buttons button:hover {
+  color: #4b044b;
+  background-color: transparent;
+}
+
+.schedule__appointment--buttons button:last-child {
+  color: #4b044b8c;
+  background: transparent;
+  border: 2px solid #4b044b8c;
+  margin-left: 14px;
+}
+
+.schedule__appointment--buttons button:last-child:hover {
+  color: #4b044b8c;
+}
+
+.schedule__appointment--comment textarea {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  resize: none;
+  color: black;
+  outline: none;
+  height: 96px;
+  border: 2px solid #cccccc;
+  background-color: #e0e0e0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.schedule__appointment--select-fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-form-field + mat-form-field {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+mat-label {
+  color: #333333 !important;
+}
+
+::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+  margin-left: auto;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: #e0e0e0 !important;
+}
+
+::ng-deep .mat-mdc-select-arrow svg {
+  color: #333333 !important;
+}
+
+::ng-deep
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  .mdc-notched-outline__leading,
+::ng-deep
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  .mdc-notched-outline__notch,
+::ng-deep
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  .mdc-notched-outline__trailing {
+  border-color: #cccccc !important;
+}
+
+::ng-deep
+  .mdc-text-field--outlined:not(
+    .mdc-text-field--disabled
+  ).mdc-text-field--focused
+  ::ng-deep
+  .mdc-notched-outline__leading,
+::ng-deep
+  .mdc-text-field--outlined:not(
+    .mdc-text-field--disabled
+  ).mdc-text-field--focused
+  ::ng-deep
+  .mdc-notched-outline__notch,
+::ng-deep
+  .mdc-text-field--outlined:not(
+    .mdc-text-field--disabled
+  ).mdc-text-field--focused
+  ::ng-deep
+  .mdc-notched-outline__trailing {
+  border-color: #cccccc !important;
+}
+
+::ng-deep.mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  ::ng-deep
+  .mdc-notched-outline
+  ::ng-deep
+  .mdc-notched-outline__leading,
+::ng-deep
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  ::ng-deep
+  .mdc-notched-outline
+  ::ng-deep
+  .mdc-notched-outline__notch,
+::ng-deep
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  ::ng-deep
+  .mdc-notched-outline
+  ::ng-deep
+  .mdc-notched-outline__trailing {
+  border-width: 1.5px !important;
+}
+
+::ng-deep
+  .mdc-text-field--outlined:not(
+    .mdc-text-field--disabled
+  ).mdc-text-field--focused
+  .mdc-floating-label {
+  color: #333333 !important;
+}
+
+.loading {
+  opacity: 0.5 !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+::ng-deep
+  .mdc-text-field--outlined:not(
+    .mdc-text-field--disabled
+  ).mdc-text-field--invalid:not(.mdc-text-field--disabled):hover
+  .mdc-floating-label {
+  color: red !important;
+}
+
+.schedule__appointment {
+  width: 80vw;
+  border-radius: 30px;
+  padding-top: 6px;
+  background: #ffffff;
+  box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+}
+
+.schedule__appointment--info {
+  background: #d81b60;
+  color: white;
+  border-radius: 12px;
+}
+
+.schedule__appointment p {
+  padding: 10px;
+  margin: 0px;
+}
+
+.error-block {
+  background-color: rgb(139, 14, 14);
+  color: white;
+  border-radius: 4px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.error-block p {
+  padding: 10px;
+}
+
+.schedule__appointment--select-fields {
+  margin-top: 30px;
+}
+
+mat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-card-title {
+  font-size: 34px !important;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #780378;
+}
+
+mat-card-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+.show--field {
+  opacity: 1 !important;
+  pointer-events: all !important;
+}
