@@ -20,6 +20,24 @@
   z-index: 9999;
 }
 
+
+.schedule__appointment--info {
+  background: #d81b60;
+  color: white;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.schedule__appointment--info  p{
+  padding: 10px;
+  margin: 0px;
+}
+
+.schedule__appointment--info  p:first-child{
+  padding-bottom: 4px;
+}
+
+
 .error-block {
   background-color: rgb(139, 14, 14);
   color: white;

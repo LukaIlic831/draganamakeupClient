@@ -149,6 +149,14 @@ mat-label {
   border-radius: 12px;
 }
 
+.prices{
+  margin-top: 8px;
+}
+
+.prices p:first-child{
+  padding-bottom: 4px;
+}
+
 .schedule__appointment p {
   padding: 10px;
   margin: 0px;
