@@ -15,8 +15,8 @@ export class AdminAppointmentComponent {
 
   constructor(private toastr: ToastrService) {}
 
-  createMessage(selectesAppointment: AppInterface | null) {
-    this.message = `Zdravo! 💄✨ Podsećam vas da imate zakazan termin za ${selectesAppointment?.date} u ${selectesAppointment?.time}, usluga: ${selectesAppointment?.service}. Radujem se vašem dolasku! DraganaMakeup`;
+  createMessage(selectedAppointment: AppInterface | null) {
+    this.message = `Zdravo! 💄✨ Podsećam vas da imate zakazan termin za ${selectedAppointment?.date} u ${selectedAppointment?.time}, usluga: ${selectedAppointment?.service}. Radujem se vašem dolasku! DraganaMakeup`;
   }
 
   copyMessage() {

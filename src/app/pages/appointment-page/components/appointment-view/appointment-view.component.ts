@@ -24,7 +24,7 @@ export class AppointmentViewComponent implements OnInit {
     private toastr: ToastrService
   ) {}
   createMessage() {
-    this.message = 'poruka';
+    this.message = `Zdravo! 💄✨ Podsećam vas da imate zakazan termin za ${this.selectedAppointment?.date} u ${this.selectedAppointment?.time}, usluga: ${this.selectedAppointment?.service}. Radujem se vašem dolasku! DraganaMakeup`;
   }
 
   copyMessage() {
