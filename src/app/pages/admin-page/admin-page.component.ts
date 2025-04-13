@@ -92,7 +92,6 @@ export class AdminPageComponent implements OnInit {
         (a, b) => a.startTime.unix() - b.startTime.unix()
       );
     });
-    console.log(this.days);
   }
 
   getAppointments = () => {

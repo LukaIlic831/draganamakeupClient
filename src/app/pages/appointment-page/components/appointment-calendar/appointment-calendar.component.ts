@@ -197,7 +197,6 @@ export class AppointmentCalendarComponent implements OnInit, OnChanges {
         }
       }
     });
-    console.log(this.appointments)
     this.isLoading = false;
     this.isCancelVisible = false;
     this.isSchedulerVisible = false;
