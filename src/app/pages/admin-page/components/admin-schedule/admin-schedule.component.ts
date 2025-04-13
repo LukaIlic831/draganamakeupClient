@@ -53,7 +53,7 @@ export class AdminScheduleComponent {
 
   constructor(private appointmentService: AppointmentService) {
     let weekStart = moment().clone().startOf('isoWeek');
-    for (let i = 0; i <= 13; i++) {
+    for (let i = 0; i <= 365; i++) {
       this.days.push(moment(weekStart).add(i, 'day').format('DD MMM YYYY'));
     }
   }

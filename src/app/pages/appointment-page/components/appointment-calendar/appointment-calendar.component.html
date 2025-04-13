@@ -30,19 +30,17 @@
   <div class="table__date--info">
     <h2>Nedelja: {{ firstDayOfWeek }} - {{ lastDayOfWeek }}</h2>
     <div class="table__date--buttons">
-      <button *ngIf="isThisWeek; else isNextWeek" (click)="setNextWeek()">
-        sledeća nedelja
+      <button class="table__date--buttons-prev" *ngIf="!isThisWeek" (click)="setPrevWeek()">
+        prethodna nedelja
       </button>
-      <ng-template #isNextWeek>
-        <button (click)="setThisWeek()">prethodna nedelja</button>
-      </ng-template>
+      <button (click)="setNextWeek()">sledeća nedelja</button>
     </div>
   </div>
 </div>
 <table
   [ngClass]="{
     'add-margin': isAdmin,
-    'loading' : isLoading
+    loading: isLoading
   }"
 >
   <thead>
@@ -69,7 +67,7 @@
         >
           <ng-container
             *ngIf="
-                getAppointment(appointment.allAppointments, date.date()) &&
+              getAppointment(appointment.allAppointments, date) &&
                 curAppointment?.user?.id === userData?.id;
               else notAvailableBlock
             "
@@ -96,7 +94,7 @@
         <ng-template #availableBlock>
           <ng-container
             *ngIf="
-              getAppointment(appointment.allAppointments, date.date());
+              getAppointment(appointment.allAppointments, date);
               else canBeScheduled
             "
           >
@@ -111,10 +109,10 @@
                 !isAdmin
                   ? openCancel(
                       $event,
-                      getAppointment(appointment.allAppointments, date.date())!
+                      getAppointment(appointment.allAppointments, date)!
                     )
                   : openAppointment(
-                      getAppointment(appointment.allAppointments, date.date())!
+                      getAppointment(appointment.allAppointments, date)!
                     )
               "
             >

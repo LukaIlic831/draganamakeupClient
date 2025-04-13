@@ -55,7 +55,7 @@ export class AppointmentScheduleMobileComponent {
     let currentDate = moment();
     let weekStart = currentDate.clone().startOf('isoWeek');
     currentDate = currentDate.add(1, 'day');
-    for (let i = 0; i <= 13; i++) {
+    for (let i = 0; i <= 365; i++) {
       if (moment(weekStart).add(i, 'day').isAfter(currentDate)) {
         this.days.push(moment(weekStart).add(i, 'day').format('DD MMM YYYY'));
       }

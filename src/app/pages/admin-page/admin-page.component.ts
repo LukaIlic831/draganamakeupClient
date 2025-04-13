@@ -50,7 +50,7 @@ export class AdminPageComponent implements OnInit {
       date: currentDate.format('DD MMM YYYY'),
       allAppointments: [],
     });
-    for (let i = 0; i <= 13; i++) {
+    for (let i = 0; i <= 365; i++) {
       this.days.push({
         date: moment(weekStart).add(i, 'day').format('DD MMM YYYY'),
         allAppointments: [],
@@ -92,6 +92,7 @@ export class AdminPageComponent implements OnInit {
         (a, b) => a.startTime.unix() - b.startTime.unix()
       );
     });
+    console.log(this.days);
   }
 
   getAppointments = () => {

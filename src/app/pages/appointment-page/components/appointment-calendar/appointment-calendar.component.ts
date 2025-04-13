@@ -63,14 +63,17 @@ export class AppointmentCalendarComponent implements OnInit, OnChanges {
   constructor(private appointmentService: AppointmentService) {
     this.tomorrow = moment().add(1, 'day');
     this.curDate = moment();
-    this.setThisWeek();
+    this.setThisWekk();
   }
 
-  setThisWeek() {
+  setThisWekk() {
     this.weekDays = [];
     this.isThisWeek = true;
-    this.firstDayOfWeek = moment().clone().startOf('isoWeek').format('DD/MM');
-    this.lastDayOfWeek = moment().clone().endOf('isoWeek').format('DD/MM');
+    this.firstDayOfWeek = moment()
+      .clone()
+      .startOf('isoWeek')
+      .format('DD/MM/YYYY');
+    this.lastDayOfWeek = moment().clone().endOf('isoWeek').format('DD/MM/YYYY');
     for (let i = 0; i < 7; i++) {
       this.weekDays.push(
         moment(moment().clone().startOf('isoWeek')).add(i, 'day')
@@ -78,22 +81,43 @@ export class AppointmentCalendarComponent implements OnInit, OnChanges {
     }
   }
 
+  setPrevWeek() {
+    this.weekDays = [];
+    this.firstDayOfWeek = moment(this.firstDayOfWeek, 'DD/MM/YYYY')
+      .clone()
+      .subtract(1, 'week')
+      .format('DD/MM/YYYY');
+    this.lastDayOfWeek = moment(this.lastDayOfWeek, 'DD/MM/YYYY')
+      .clone()
+      .subtract(1, 'week')
+      .format('DD/MM/YYYY');
+    if (
+      this.curDate.startOf('day').isSameOrAfter(moment(this.firstDayOfWeek, 'DD/MM/YYYY')) &&
+      this.curDate.startOf('day').isSameOrBefore(moment(this.lastDayOfWeek, 'DD/MM/YYYY'))
+    ) {
+      this.isThisWeek = true;
+    }
+    for (let i = 0; i < 7; i++) {
+      this.weekDays.push(
+        moment(this.firstDayOfWeek, 'DD/MM/YYYY').add(i, 'day')
+      );
+    }
+  }
+
   setNextWeek() {
     this.weekDays = [];
     this.isThisWeek = false;
-    this.firstDayOfWeek = moment()
+    this.firstDayOfWeek = moment(this.firstDayOfWeek, 'DD/MM/YYYY')
       .clone()
-      .startOf('isoWeek')
       .add(1, 'week')
-      .format('DD/MM');
-    this.lastDayOfWeek = moment()
+      .format('DD/MM/YYYY');
+    this.lastDayOfWeek = moment(this.lastDayOfWeek, 'DD/MM/YYYY')
       .clone()
-      .endOf('isoWeek')
       .add(1, 'week')
-      .format('DD/MM');
+      .format('DD/MM/YYYY');
     for (let i = 0; i < 7; i++) {
       this.weekDays.push(
-        moment(moment().clone().add(1, 'week').startOf('isoWeek')).add(i, 'day')
+        moment(this.firstDayOfWeek, 'DD/MM/YYYY').add(i, 'day')
       );
     }
   }
@@ -173,13 +197,14 @@ export class AppointmentCalendarComponent implements OnInit, OnChanges {
         }
       }
     });
+    console.log(this.appointments)
     this.isLoading = false;
     this.isCancelVisible = false;
     this.isSchedulerVisible = false;
   }
 
-  getAppointment(allAppointments: CalendarAppointment[], day: number) {
-    this.curAppointment = allAppointments.find((ap) => ap.day == day);
+  getAppointment(allAppointments: CalendarAppointment[], date: Moment) {
+    this.curAppointment = allAppointments.find((ap) => moment(ap.startTime).startOf("day").isSame(date));
     return this.curAppointment;
   }
 
