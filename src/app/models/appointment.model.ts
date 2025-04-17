@@ -8,6 +8,7 @@ export interface Appointment {
   startTime: Moment;
   comment?: string;
   user?: User;
+  adminAdded: boolean;
 }
 
 export interface AppInterface extends Appointment {

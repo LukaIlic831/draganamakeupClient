@@ -4,7 +4,10 @@ import { MatCardModule } from '@angular/material/card';
 import { AppointmentService } from '../../services/appointment.service';
 import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { AppInterface, Appointment } from '../../../../models/appointment.model';
+import {
+  AppInterface,
+  Appointment,
+} from '../../../../models/appointment.model';
 
 @Component({
   selector: 'app-appointment-view',
@@ -17,6 +20,7 @@ export class AppointmentViewComponent implements OnInit {
   @Input() isAppointmentVisible: boolean = false;
   @Output() toggleEvent = new EventEmitter<boolean>();
   message: string = '';
+  @Input() getAppointments!: () => void;
   selectedAppointment: AppInterface | null = null;
 
   constructor(
@@ -28,6 +32,7 @@ export class AppointmentViewComponent implements OnInit {
   }
 
   copyMessage() {
+    console.log(this.selectedAppointment);
     navigator.clipboard
       .writeText(this.message)
       .then(() => {
@@ -44,6 +49,19 @@ export class AppointmentViewComponent implements OnInit {
       this.toggleEvent.emit(false);
   }
 
+  cancelAppointment() {
+    this.appointmentService
+      .cancelAppointment(this.selectedAppointmentID!.toString())
+      .subscribe({
+        next: () => {
+          this.getAppointments();
+          this.toggleEvent.emit(false);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+  }
   ngOnInit() {
     this.appointmentService
       .getAppointmentByID(String(this.selectedAppointmentID))

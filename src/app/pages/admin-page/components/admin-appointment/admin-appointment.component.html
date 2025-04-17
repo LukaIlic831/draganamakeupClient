@@ -6,11 +6,11 @@
     <ul class="appointment__details">
       <li class="appointment__details--item">
         <p>Korisnicko ime</p>
-        <span>{{ appointment?.user!.username }}</span>
+        <span>{{ (appointment?.user)!.username }}</span>
       </li>
       <li class="appointment__details--item">
         <p>Broj telefona</p>
-        <span>{{ appointment?.user!.phone }}</span>
+        <span>{{ (appointment?.user)!.phone }}</span>
       </li>
       <li class="appointment__details--item">
         <p>Usluga</p>
@@ -32,6 +32,13 @@
         *ngIf="!message; else copyButton"
       >
         Napravi Poruku
+      </button>
+      <button
+        class="appointment__buttons--button remove-btn"
+        *ngIf="appointment?.adminAdded"
+        (click)="cancelAppointment()"
+      >
+        Obrisi Termin
       </button>
       <ng-template #copyButton>
         <button class="appointment__buttons--button" (click)="copyMessage()">

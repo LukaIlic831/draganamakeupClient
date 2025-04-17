@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ToastrService } from 'ngx-toastr';
 import { AppInterface } from '../../../../models/appointment.model';
+import { AppointmentService } from '../../../appointment-page/services/appointment.service';
 @Component({
   selector: 'app-admin-appointment',
   imports: [MatCardModule, CommonModule],
@@ -12,8 +13,10 @@ import { AppInterface } from '../../../../models/appointment.model';
 export class AdminAppointmentComponent {
   @Input() appointment: AppInterface | null = null;
   message: string = '';
+  @Input() getAppointments!: () => void;
 
-  constructor(private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService, private appointmentService: AppointmentService) {
+  }
 
   createMessage(selectedAppointment: AppInterface | null) {
     this.message = `Zdravo! 💄✨ Podsećam vas da imate zakazan termin za ${selectedAppointment?.date} u ${selectedAppointment?.time}, usluga: ${selectedAppointment?.service}. Radujem se vašem dolasku! DraganaMakeup`;
@@ -27,6 +30,19 @@ export class AdminAppointmentComponent {
       })
       .catch((err) => {
         console.error(err);
+      });
+  }
+
+  cancelAppointment() {
+    this.appointmentService
+      .cancelAppointment(this.appointment?.id.toString()!)
+      .subscribe({
+        next: () => {
+          this.getAppointments();
+        },
+        error: (err) => {
+          console.error(err);
+        },
       });
   }
 }

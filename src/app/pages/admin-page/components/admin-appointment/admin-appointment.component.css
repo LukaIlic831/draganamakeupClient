@@ -56,6 +56,16 @@
   transform: scale(0.9);
 }
 
+.remove-btn{
+  margin-top: 8px;
+  background: rgb(139, 14, 14);
+  border-color: rgb(139, 14, 14);
+}
+
+.remove-btn:hover{
+  color: rgb(139, 14, 14) !important;
+}
+
 .info {
   flex-direction: column;
   align-items: start;
