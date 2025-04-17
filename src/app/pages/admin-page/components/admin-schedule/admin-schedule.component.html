@@ -85,6 +85,13 @@
             <input matInput="username" formControlName="username" />
           </mat-form-field>
         </div>
+        <div class="schedule__appointment--comment">
+          <textarea
+            formControlName="comment"
+            maxlength="200"
+            placeholder="Unesite dodatne informacije (opciono)"
+          ></textarea>
+        </div>
         <div class="error-block" *ngIf="isError">
           <p>Došlo je do greške.</p>
         </div>

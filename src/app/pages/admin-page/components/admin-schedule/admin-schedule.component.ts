@@ -49,6 +49,7 @@ export class AdminScheduleComponent {
     appointmentStartTime: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
+    comment: new FormControl(''),
   });
 
   constructor(private appointmentService: AppointmentService) {
@@ -126,7 +127,7 @@ export class AdminScheduleComponent {
         startTime: appointmentDate.utc(),
         duration: this.scheduleForm.value.service == 'obrve' ? 30 : 60,
         service: this.scheduleForm.value.service,
-        comment: '',
+        comment: this.scheduleForm.value.comment,
         username: this.scheduleForm.value.username,
         phone: this.scheduleForm.value.phone,
       };
