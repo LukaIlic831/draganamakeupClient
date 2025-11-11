@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "http://draganamakeup2.runasp.net/Appointment/$1"
+      "destination": "http://draganamakeup2.runasp.net/$1"
     }
   ]
 }
