@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://draganamakeupbackend-production.up.railway.app/$1"
+      "destination": "http://draganamakeup2.runasp.net/Appointment/$1"
     }
   ]
 }
