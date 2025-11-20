@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { initReverseScrolling } from '../../scripts/reverse-scrolling';
+import { SectionGalleryComponent } from './components/section-gallery/section-gallery.component';
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, SectionGalleryComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
 })
