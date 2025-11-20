@@ -247,13 +247,12 @@ section {
 .section__services {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(2, 550px);
-  justify-content: space-between;
+  grid-template-columns: repeat(3, 0.8fr);
+  gap:50px;
 }
 
 .section__service {
   text-align: center;
-  width: 550px;
 }
 
 .section__service--img {
