@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { initReverseScrolling } from '../../scripts/reverse-scrolling';
 @Component({
   selector: 'app-home-page',
   imports: [RouterLink, CommonModule],
@@ -16,6 +17,10 @@ export class HomePageComponent implements OnInit {
     const linkElement = event.target as HTMLAnchorElement;
     const section = document.getElementById(linkElement.href.split('#')[1]);
     section?.scrollIntoView({ block: 'start' });
+  }
+
+  ngAfterViewInit() {
+    initReverseScrolling();
   }
 
   ngOnInit() {
