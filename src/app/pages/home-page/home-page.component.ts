@@ -1,35 +1,25 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { initReverseScrolling } from '../../scripts/reverse-scrolling';
+import { Component } from '@angular/core';
 import { SectionGalleryComponent } from './components/section-gallery/section-gallery.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { NavComponent } from './components/nav/nav.component';
+import { HomeBackgroundComponent } from './components/home-background/home-background.component';
+import { AboutSectionComponent } from './components/about-section/about-section.component';
+import { ServicesSectionComponent } from './components/services-section/services-section.component';
+import { FooterComponent } from './components/footer/footer.component';
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink, CommonModule, SectionGalleryComponent],
+  imports: [
+    SectionGalleryComponent,
+    LoaderComponent,
+    NavComponent,
+    HomeBackgroundComponent,
+    AboutSectionComponent,
+    ServicesSectionComponent,
+    FooterComponent,
+    SectionGalleryComponent,
+  ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
 })
-export class HomePageComponent implements OnInit {
-  currentYear = new Date().getFullYear();
-  hide = false;
-  remove = false;
-  scrollToSection(event: Event) {
-    event.preventDefault();
-    const linkElement = event.target as HTMLAnchorElement;
-    const section = document.getElementById(linkElement.href.split('#')[1]);
-    section?.scrollIntoView({ block: 'start' });
-  }
-
-  ngAfterViewInit() {
-    initReverseScrolling();
-  }
-
-  ngOnInit() {
-    setTimeout(() => {
-      this.hide = true;
-    }, 3000);
-    setTimeout(() => {
-      this.remove = true;
-    }, 3500);
-  }
+export class HomePageComponent {
 }

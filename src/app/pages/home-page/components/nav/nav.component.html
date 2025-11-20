@@ -1,0 +1,21 @@
+<nav>
+  <div class="nav__wrapper">
+    <div class="home__logo">
+      <img src="assets/logo.png" alt="" />
+    </div>
+    <ul class="home__list">
+      <li class="home__list--item home-item">
+        <a>Početna</a>
+      </li>
+      <li class="home__list--item">
+        <a href="#about" (click)="scrollToSection($event)">O meni</a>
+      </li>
+      <li class="home__list--item">
+        <a href="#services" (click)="scrollToSection($event)">Usluge</a>
+      </li>
+      <li class="home__list--item">
+        <a href="#gallery" (click)="scrollToSection($event)">Galerija</a>
+      </li>
+    </ul>
+  </div>
+</nav>

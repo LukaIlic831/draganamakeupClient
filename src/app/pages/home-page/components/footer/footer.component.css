@@ -1,0 +1,122 @@
+footer {
+  width: 100%;
+  background-color: white;
+}
+
+.footer__wrapper {
+  margin: 0 120px;
+  padding-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
+}
+
+.footer__block--title {
+  font-size: 20px;
+  color: black;
+}
+
+.footer__block--social,
+.footer__block--contact,
+.footer__block--location {
+  text-align: center;
+}
+
+.footer__block--social-icons {
+  width: 100%;
+  padding-left: 0;
+}
+
+.footer__block--social-icons li {
+  display: inline-block;
+}
+
+.footer__block--social-icons li {
+  margin-right: 4px;
+}
+
+.footer__block--social-icons li:last-child {
+  margin-right: 0;
+}
+
+.footer__block--social-icons img {
+  color: #d81b60 !important;
+  display: block;
+  text-align: center;
+  margin-right: 5px;
+  width: 28px;
+  height: 28px;
+  padding: 8px;
+  border-radius: 50%;
+  border: 2px dotted transparent;
+  transition: 0.4s;
+}
+
+.footer__block--social-icons img:hover {
+  border-color: #d81b60;
+}
+
+.footer__block--contact-options {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  padding-left: 84px;
+}
+
+.footer__block--contact-options li div {
+  display: flex;
+  align-items: center;
+}
+
+.footer__block--contact-options li div img {
+  width: 18px;
+  height: 18px;
+  padding-right: 10px;
+}
+
+.footer__block--contact-options li div p {
+  margin: 0;
+}
+
+.footer__block--contact-options li div:first-child p {
+  padding-bottom: 4px;
+}
+
+.footer__block--contact-options li div:last-child p {
+  padding-top: 4px;
+}
+
+.copyright {
+  font-size: 14px;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 1024px) {
+  .footer__wrapper {
+    margin: 0 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__block--contact-options {
+    padding: 0;
+  }
+
+  .footer__block--contact-options li div {
+    justify-content: center;
+  }
+
+  .footer__block--social,
+  .footer__block--contact {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer__wrapper {
+    margin: 0 20px;
+  }
+}
